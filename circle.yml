@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 5.5.0
+test:
+  override:
+    - npm run coverage
+general:
+  artifacts:
+    - 'coverage'
+dependencies:
+  pre:
+    # - sudo apt-get install redis-server
+  post:
+    # - redis-server --port 6380 --daemonize yes
+

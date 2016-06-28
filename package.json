@@ -1,0 +1,34 @@
+{
+  "name": "tc-rxjs",
+  "version": "1.0.0",
+  "description": "TDC rxjs demo",
+  "scripts": {
+    "buildClient": "rm -rf ./__client__ && NODE_ENV=production webpack",
+    "devClient": "rm -rf ./__client__ && webpack -w",
+    "start": "./node_modules/.bin/tsc && node ./__server__/index.js",
+    "devServer": "./node_modules/.bin/nodemon ./__server__/index.js",
+    "tscServer": "rm -rf ./__server__ && ./node_modules/.bin/tsc --project ./tsconfig.server.json --watch --pretty"
+  },
+  "author": "Felipe Rohde <feliperohdee@gmail.com>",
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "glob": "^7.0.3",
+    "nodemon": "^1.9.2",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.2",
+    "webpack": "^1.13.1",
+    "webpack-notifier": "^1.3.0",
+    "ws-typings": "^1.0.0"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^1.1.1",
+    "lodash": "^4.13.1",
+    "react": "^15.1.0",
+    "react-chartjs": "^0.7.3",
+    "react-dom": "^15.1.0",
+    "restify": "^4.1.1",
+    "rxjs": "^5.0.0-beta.9",
+    "ws": "^1.1.1"
+  }
+}

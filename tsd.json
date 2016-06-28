@@ -1,0 +1,54 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "node/node.d.ts": {
+      "commit": "3bbe35a4cfdf09bd2a87ed660bf918131679da19"
+    },
+    "es6-shim/es6-shim.d.ts": {
+      "commit": "dade4414712ce84e3c63393f1aae407e9e7e6af7"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "299b5caa22876ef27dc8e9a5b7fd7bf93457b6f4"
+    },
+    "assertion-error/assertion-error.d.ts": {
+      "commit": "6052959591c9bc6f8463c58220965c7030ba934d"
+    },
+    "chai/chai.d.ts": {
+      "commit": "6052959591c9bc6f8463c58220965c7030ba934d"
+    },
+    "sinon/sinon.d.ts": {
+      "commit": "6052959591c9bc6f8463c58220965c7030ba934d"
+    },
+    "sinon-chai/sinon-chai.d.ts": {
+      "commit": "6052959591c9bc6f8463c58220965c7030ba934d"
+    },
+    "superagent/superagent.d.ts": {
+      "commit": "6052959591c9bc6f8463c58220965c7030ba934d"
+    },
+    "supertest/supertest.d.ts": {
+      "commit": "6052959591c9bc6f8463c58220965c7030ba934d"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "cdddb5911e05a783ce2ea2f3927be9f5921fa8a9"
+    },
+    "react/react-dom.d.ts": {
+      "commit": "cdddb5911e05a783ce2ea2f3927be9f5921fa8a9"
+    },
+    "react/react.d.ts": {
+      "commit": "cdddb5911e05a783ce2ea2f3927be9f5921fa8a9"
+    },
+    "ws/ws.d.ts": {
+      "commit": "3bbe35a4cfdf09bd2a87ed660bf918131679da19"
+    },
+    "bunyan/bunyan.d.ts": {
+      "commit": "3bbe35a4cfdf09bd2a87ed660bf918131679da19"
+    },
+    "restify/restify.d.ts": {
+      "commit": "3bbe35a4cfdf09bd2a87ed660bf918131679da19"
+    }
+  }
+}
