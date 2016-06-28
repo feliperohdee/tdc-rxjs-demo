@@ -5,7 +5,7 @@
   "scripts": {
     "buildClient": "rm -rf ./__client__ && NODE_ENV=production webpack",
     "devClient": "rm -rf ./__client__ && webpack -w",
-    "start": "./node_modules/.bin/tsc && node ./__server__/index.js",
+    "start": "./node_modules/.bin/tsc --project ./tsconfig.server.json && node ./__server__/index.js",
     "devServer": "./node_modules/.bin/nodemon ./__server__/index.js",
     "tscServer": "rm -rf ./__server__ && ./node_modules/.bin/tsc --project ./tsconfig.server.json --watch --pretty"
   },
