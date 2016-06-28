@@ -2,7 +2,8 @@ import * as _ from 'lodash';
 import {
 	Observable,
 	Subscriber,
-	Subscription
+	Subscription,
+	Subject
 } from 'rxjs';
 import {
 	WebSocketSubject,
@@ -13,10 +14,15 @@ import {ITickerData} from '../';
 export class Ticker {
 	private _ws: WebSocketSubject<ITickerData>;
 	private _source: Observable<ITickerData>;
+	public connectionState: Subject<Event> = new Subject<Event>();
 
 	get ws(): {client: WebSocketSubject<ITickerData>, source: Observable<ITickerData>} {
 		if (!(this.isOpen() || this.isConnecting())) {
-			this._ws = Observable.webSocket<ITickerData>('ws://localhost:3000/ws');
+			this._ws = Observable.webSocket<ITickerData>({
+				url: 'ws://localhost:3000/ws',
+				openObserver: this.connectionState,
+				closeObserver: this.connectionState
+			});
 			this._source = this._ws.share();
 		}
 

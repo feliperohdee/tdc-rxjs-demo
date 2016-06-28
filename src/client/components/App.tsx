@@ -10,8 +10,9 @@ let configs = require('../../../config.json');
 
 interface IAppProps {}
 interface IAppState {
-	tickers: ITicker;
-	activeTickers: ITicker;
+	isOnline?: boolean;
+	tickers?: ITicker;
+	activeTickers?: ITicker;
 }
 
 export class App extends React.Component<IAppProps, IAppState>{
@@ -26,8 +27,17 @@ export class App extends React.Component<IAppProps, IAppState>{
 		this.tickerModel = new TickerModel();
 		this.state = {
 			tickers: this.tickers,
-			activeTickers: {}
+			activeTickers: {},
+			isOnline: false
 		}
+	}
+
+	componentDidMount(): void {
+		this.tickerModel.connectionState
+			.map(({type}) => type)
+			.subscribe(type => this.setState({
+				isOnline: type === 'open'
+			}));
 	}
 
 	toggle(code: string, add: boolean = true): void {
@@ -52,6 +62,7 @@ export class App extends React.Component<IAppProps, IAppState>{
 
 		return (
 			<section className="ui container">
+				<label className={`ui ${this.state.isOnline ? 'green' : 'red'} circular big label`} id="connection-state"></label>
 				<Search toggle={(code, add) => this.toggle(code, add)}/>
 
 				{charts}

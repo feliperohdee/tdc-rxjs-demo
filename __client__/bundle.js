@@ -4091,9 +4091,21 @@ webpackJsonp([0],{
 	        this.tickerModel = new models_1.Ticker();
 	        this.state = {
 	            tickers: this.tickers,
-	            activeTickers: {}
+	            activeTickers: {},
+	            isOnline: false
 	        };
 	    }
+	    App.prototype.componentDidMount = function () {
+	        var _this = this;
+	        this.tickerModel.connectionState
+	            .map(function (_a) {
+	            var type = _a.type;
+	            return type;
+	        })
+	            .subscribe(function (type) { return _this.setState({
+	            isOnline: type === 'open'
+	        }); });
+	    };
 	    App.prototype.toggle = function (code, add) {
 	        if (add === void 0) { add = true; }
 	        var ticker = _.get(this.tickers, code);
@@ -4111,7 +4123,7 @@ webpackJsonp([0],{
 	        var charts = _.map(this.state.activeTickers, function (ticker, code) {
 	            return React.createElement(_1.Chart, {key: code, code: code, name: _.get(configs.tickers, code, ''), ticker: ticker});
 	        });
-	        return (React.createElement("section", {className: "ui container"}, React.createElement(_1.Search, {toggle: function (code, add) { return _this.toggle(code, add); }}), charts));
+	        return (React.createElement("section", {className: "ui container"}, React.createElement("label", {className: "ui " + (this.state.isOnline ? 'green' : 'red') + " circular big label", id: "connection-state"}), React.createElement(_1.Search, {toggle: function (code, add) { return _this.toggle(code, add); }}), charts));
 	    };
 	    return App;
 	}(React.Component));
@@ -4138,11 +4150,16 @@ webpackJsonp([0],{
 	var rxjs_1 = __webpack_require__(186);
 	var Ticker = (function () {
 	    function Ticker() {
+	        this.connectionState = new rxjs_1.Subject();
 	    }
 	    Object.defineProperty(Ticker.prototype, "ws", {
 	        get: function () {
 	            if (!(this.isOpen() || this.isConnecting())) {
-	                this._ws = rxjs_1.Observable.webSocket('ws://localhost:3000/ws');
+	                this._ws = rxjs_1.Observable.webSocket({
+	                    url: 'ws://localhost:3000/ws',
+	                    openObserver: this.connectionState,
+	                    closeObserver: this.connectionState
+	                });
 	                this._source = this._ws.share();
 	            }
 	            return {
