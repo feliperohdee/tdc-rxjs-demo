@@ -1,6 +1,7 @@
-var webpack = require('webpack');
-var notifier = require('webpack-notifier');
-var base = {
+var webpack = require('webpack'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    notifier = require('webpack-notifier'),
+    base = {
     cache: true,
     debug: true,
     verbose: true,
@@ -11,7 +12,6 @@ var base = {
     },
     output: {
         path: '__client__',
-        publicPath: '__client__',
         filename: '[name].js'
     },
     resolve: {
@@ -24,6 +24,30 @@ var base = {
         }, {
             test: /\.tsx$/,
             loader: 'ts-loader'
+        }, {
+            test: /\.json$/,
+            loader: 'json-loader'
+        },, {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract('css-loader')
+        }, {
+            test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
+            loader: 'file-loader?mimetype=application/font-woff&name=fonts/[name].[ext]'
+        }, {
+            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+            loader: 'file-loader?mimetype=application/x-font-ttf&name=fonts/[name].[ext]'
+        }, {
+            test: /\.eot(\?v=\d+\.\d+\.\d+)?\??$/,
+            loader: 'file-loader?mimetype=application/vnd.ms-fontobject&name=fonts/[name].[ext]'
+        }, {
+            test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+            loader: 'file-loader?mimetype=application/font-otf&name=fonts/[name].[ext]'
+        }, {
+            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+            loader: 'file-loader?mimetype=image/svg+xml&name=fonts/[name].[ext]'
+        }, {
+            test: /\.png$/,
+            loader: 'file-loader?name=images/[name].[ext]'
         }],
         noParse: [
             /\.min\.js/
@@ -54,7 +78,8 @@ if (process.env.NODE_ENV === 'production') {
             compress: {
                 warnings: false
             }
-        })
+        }),
+        new ExtractTextPlugin('[name].css')
     ]
 } else {
     base.plugins = [
@@ -65,7 +90,8 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new notifier({
             title: 'Client built'
-        })
+        }),
+        new ExtractTextPlugin('[name].css')
     ]
 }
 

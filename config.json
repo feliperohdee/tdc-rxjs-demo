@@ -1,0 +1,32 @@
+{
+	"tickers": {
+		"msft": "Microsoft Corporation",
+		"nflx": "Netflix Inc.",
+		"adbe": "Adobe Systems Inc.",
+		"aapl": "Apple Inc.",
+		"AKAM": "Akamai Technologies Inc.",
+		"BIDU": "Baidu Inc.",
+		"CARB": "Carbonite Inc.",
+		"CHICF": "ChitrChatr Communications Inc.",
+		"CNV": "Cnova N.V.",
+		"CCOI": "Cogent Communications Holdings Inc.",
+		"CXDO": "Crexendo Inc.",
+		"CRWG": "CrowdGather Inc.",
+		"FB": "Facebook Inc.",
+		"FLPC": "First Liberty Power Corp.",
+		"GDDY": "GoDaddy Inc.",
+		"HDSI": "HDS International Corp.",
+		"IAC": "IAC/InterActiveCorp.",
+		"GEEK": "INTERNET AMERICA",
+		"JCOM": "j2 Global Inc.",
+		"LOGL": "Legend Oil & Gas Ltd.",
+		"LLNW": "Limelight Networks Inc.",
+		"MEET": "MeetMe Inc.",
+		"MOMO": "Momo Inc.",
+		"NTES": "Netease Inc.",
+		"NEWC": "New Colombia Resources Inc.",
+		"EGOV": "NIC Inc.",
+		"OPESY": "Opera Software ASA ADR",
+		"RAX": "Rackspace Hosting Inc."
+	}
+}

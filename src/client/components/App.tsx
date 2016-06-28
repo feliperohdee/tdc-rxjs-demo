@@ -3,8 +3,10 @@ import * as React from  'react';
 import {Observable, Subscription} from 'rxjs';
 import {Line} from  'react-chartjs';
 import {Ticker as TickerModel} from '../models';
-import {Chart} from './';
 import {ITicker, ITickerData} from '../';
+import {Chart, Search} from './';
+
+let configs = require('../../../config.json');
 
 interface IAppProps {}
 interface IAppState {
@@ -14,11 +16,9 @@ interface IAppState {
 
 export class App extends React.Component<IAppProps, IAppState>{
 	private tickerModel: TickerModel;
-	private tickers: any = {
-		nflx: null,
-		msft: null,
-		adbe: null
-	}
+	private tickers: any = _.transform(configs.tickers, (reduction: any, name: string, ticker: string) => {
+		reduction[ticker] = null;
+	}, {});
 
 	constructor(){
 		super();
@@ -30,14 +30,14 @@ export class App extends React.Component<IAppProps, IAppState>{
 		}
 	}
 
-	toggle(code: string): void {
+	toggle(code: string, add: boolean = true): void {
 		let ticker: ITicker = _.get(this.tickers, code);
 
 		if(_.isUndefined(ticker)){
 			return;
 		}
 
-		this.tickers[code] = this.tickers[code] ? null : this.tickerModel.get(code);
+		this.tickers[code] = add ? this.tickerModel.get(code) : null;
 
 		this.setState({
 			tickers: this.tickers,
@@ -45,18 +45,15 @@ export class App extends React.Component<IAppProps, IAppState>{
 		});
 	}
 
-	render(): JSX.Element {
-		let buttons: Array<JSX.Element> = _.map(this.state.tickers as any, (ticker: Observable<ITickerData>, code: string) => {
-			return <button key={code} onClick={() => this.toggle(code)}>{ code.toUpperCase() }</button>;
-		});
-		
+	render(): JSX.Element {		
 		let charts: Array<JSX.Element> = _.map(this.state.activeTickers as any, (ticker: Observable<ITickerData>, code: string) => {
-			return <Chart key={code} code={code} ticker={ticker}/>;
+			return <Chart key={code} code={code} name={_.get(configs.tickers, code, '')} ticker={ticker}/>;
 		});
 
 		return (
-			<section>
-				{buttons}
+			<section className="ui container">
+				<Search toggle={(code, add) => this.toggle(code, add)}/>
+
 				{charts}
 			</section>
 		);

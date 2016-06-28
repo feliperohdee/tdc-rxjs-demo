@@ -6,6 +6,7 @@ import {ITickerData} from '../';
 
 interface IChartProps {
 	code: string;
+	name: string;
 	ticker: Observable<ITickerData>
 }
 
@@ -33,10 +34,11 @@ export class Chart extends React.Component<IChartProps, IChartState>{
 		super(props);
 
 		this.options = {
-				title: {
-				display: true,
-				text: props.code
-			}
+			responsive: true,
+			scaleOverride: true,
+    		scaleSteps: 10,
+    		scaleStepWidth: 20,
+    		scaleStartValue: 0
 		};
 
 		this.state = {
@@ -67,12 +69,11 @@ export class Chart extends React.Component<IChartProps, IChartState>{
 		this.subscription.unsubscribe();
 	}
 
-	render(): JSX.Element {
-		console.log(this.options);
-		
+	render(): JSX.Element {		
 		return (
-			<section>
-				<Line data={this.state.data} options={this.options} width="600" height="250"/>
+			<section className="chart">
+				<h2>{this.props.name}</h2>
+				<Line data={this.state.data} options={this.options}/>
 			</section>
 		);
 	}
